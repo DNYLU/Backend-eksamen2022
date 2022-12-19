@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     public Iterable<Product> getProductsByName(String name) {
-        return productRepository.findProductsByName(name);
+        return (Iterable<Product>) productRepository.findProductsByName(name);
     }
 
     public Product getProductById(Long id) {

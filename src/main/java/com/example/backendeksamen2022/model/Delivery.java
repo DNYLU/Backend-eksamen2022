@@ -1,6 +1,7 @@
 package com.example.backendeksamen2022.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,7 +25,4 @@ public class Delivery {
     @Column(name = "delivery_destination", nullable = false)
     private String destination;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "delivery")
-    private List<ProductOrder> orders;
 }

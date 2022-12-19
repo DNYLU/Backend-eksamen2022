@@ -31,8 +31,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> foundProducts = (List<Product>) productService.getAllProducts();
+    public ResponseEntity<Iterable<Product>> getAllProducts() {
+        Iterable<Product> foundProducts =  productService.getAllProducts();
         return ResponseEntity.ok(foundProducts);
     }
 
@@ -43,8 +43,8 @@ public class ProductController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
-        List<Product> foundProducts = (List<Product>) productService.getProductsByName(name);
+    public ResponseEntity<Iterable<Product>> getProductsByName(@PathVariable String name) {
+        Iterable<Product> foundProducts = productService.getProductsByName(name);
         return ResponseEntity.ok(foundProducts);
     }
 
