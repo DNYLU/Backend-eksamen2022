@@ -1,14 +1,13 @@
 package com.example.backendeksamen2022.controller;
 
+import com.example.backendeksamen2022.dto.AddDeliveryDto;
 import com.example.backendeksamen2022.model.Delivery;
-import com.example.backendeksamen2022.model.ProductOrder;
-import com.example.backendeksamen2022.repository.DeliveryRepository;
 import com.example.backendeksamen2022.service.DeliveryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -17,17 +16,19 @@ public class DeliveryController {
 
     private final DeliveryService deliveryService;
 
-    private final DeliveryRepository deliveryRepository;
 
-    public DeliveryController(DeliveryService deliveryService, DeliveryRepository deliveryRepository) {
+    public DeliveryController(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
-        this.deliveryRepository = deliveryRepository;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Delivery> addDelivery(@RequestBody Delivery delivery) {
-        Delivery addedDelivery = deliveryService.addDelivery(delivery);
-        return new ResponseEntity<>(addedDelivery, HttpStatus.OK);
+    public ResponseEntity<Delivery> addDelivery(@RequestBody AddDeliveryDto deliveryDto) {
+        Delivery delivery = deliveryService.addDelivery(
+                deliveryDto.getDate(),
+                deliveryDto.getFromWarehouse(),
+                deliveryDto.getDestination()
+        );
+        return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
 
     @GetMapping
@@ -42,4 +43,9 @@ public class DeliveryController {
         return new ResponseEntity<>(foundDelivery, HttpStatus.OK);
     }
 
+    @PostMapping("/add/vanId/{vanId}/deliveryId/{deliveryId}")
+    public ResponseEntity<Delivery> addDeliveryToVan(@PathVariable Long vanId, @PathVariable Long deliveryId) {
+        Delivery addedDeliveryToVan = deliveryService.addDeliveryToVan(vanId, deliveryId);
+        return new ResponseEntity<>(addedDeliveryToVan, HttpStatus.OK);
+    }
 }

@@ -3,11 +3,7 @@ package com.example.backendeksamen2022.service;
 import com.example.backendeksamen2022.exception.ResourceNotFoundException;
 import com.example.backendeksamen2022.model.Product;
 import com.example.backendeksamen2022.repository.ProductRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +24,7 @@ public class ProductService {
     }
 
     public Iterable<Product> getProductsByName(String name) {
-        return (Iterable<Product>) productRepository.findProductsByName(name);
+        return  productRepository.findProductsByName(name);
     }
 
     public Product getProductById(Long id) {

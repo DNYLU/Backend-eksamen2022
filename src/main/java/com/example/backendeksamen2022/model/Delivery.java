@@ -1,12 +1,13 @@
 package com.example.backendeksamen2022.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+
 
 @Entity
 @Data
@@ -17,12 +18,23 @@ public class Delivery {
     private Long id;
 
     @Column(name = "delivery_date", nullable = false)
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "delivery_fromWarehouse", nullable = false)
     private String fromWarehouse;
 
     @Column(name = "delivery_destination", nullable = false)
     private String destination;
+
+    @Column(name = "delivery_totalWeight")
+    private double totalWeight;
+
+    @Column(name = "delivery_totalPrice")
+    private double totalPrice;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "van_id")
+    private Van van;
 
 }

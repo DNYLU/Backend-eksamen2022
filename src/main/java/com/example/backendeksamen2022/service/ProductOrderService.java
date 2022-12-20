@@ -1,5 +1,6 @@
 package com.example.backendeksamen2022.service;
 
+import com.example.backendeksamen2022.exception.ResourceNotFoundException;
 import com.example.backendeksamen2022.model.Delivery;
 import com.example.backendeksamen2022.model.Product;
 import com.example.backendeksamen2022.model.ProductOrder;
@@ -25,17 +26,19 @@ public class ProductOrderService {
 
     public ProductOrder addProductOrder(Long deliveryId, Long productId, int quantity) {
         Delivery delivery = deliveryRepository.findById(deliveryId)
-                .orElseThrow(() -> new ResolutionException("Delivery not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Delivery not found"));
 
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResolutionException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         ProductOrder productOrder = new ProductOrder();
         productOrder.setDelivery(delivery);
         productOrder.setProduct(product);
         productOrder.setQuantity(quantity);
 
-
+        delivery.setTotalWeight(delivery.getTotalWeight() + (product.getWeight() * quantity));
+        delivery.setTotalPrice(delivery.getTotalPrice() + (product.getPrice() * quantity));
+        deliveryRepository.save(delivery);
         return productOrderRepository.save(productOrder);
     }
 
