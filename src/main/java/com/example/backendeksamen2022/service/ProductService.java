@@ -45,7 +45,7 @@ public class ProductService {
         }
 
         Product product = optionalProduct.get();
-        if (updateProduct.getName() != null) {
+        if (updateProduct.getName().isBlank() == false) {  //Changed from != null to isBlank() == false
             product.setName(updateProduct.getName());
         }
         if (updateProduct.getPrice() != 0) {
