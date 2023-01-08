@@ -46,7 +46,7 @@ public class ProductServiceTest {
     @DisplayName("Test retrieving all products")
     public void testRetrieveProductsFromDatabase() {
         allProductsInDatabase = productRepository.findAll();
-        assertEquals(3, allProductsInDatabase.size(), "The list size should be 3 products");
+        assertEquals(3, allProductsInDatabase.size(), "The list size should be 3 products"); //Message is optional
     }
 
     @Test

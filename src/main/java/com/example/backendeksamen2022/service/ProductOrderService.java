@@ -9,7 +9,6 @@ import com.example.backendeksamen2022.repository.ProductOrderRepository;
 import com.example.backendeksamen2022.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 
 @Service
 public class ProductOrderService {
