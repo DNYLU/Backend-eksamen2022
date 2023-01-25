@@ -1,7 +1,6 @@
 package com.example.backendeksamen2022.controller;
 
 import com.example.backendeksamen2022.model.Product;
-import com.example.backendeksamen2022.repository.ProductRepository;
 import com.example.backendeksamen2022.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +14,10 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
-    private final ProductRepository productRepository;
 
-    public ProductController(ProductService productService,
-                             ProductRepository productRepository) {
+
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.productRepository = productRepository;
     }
 
     @PostMapping(value = "/add")
